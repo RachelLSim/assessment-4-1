@@ -21,27 +21,37 @@ module.exports = {
         .catch(err => console.log(err))
     },
 
+    createCity: (req, res) => {
+        sequelize.query(`
+        INSERT INTO cities
+            name = ${name},
+            rating =  ${rating},
+            countryId = ${countryID}
+        `)
+        .then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
     seed: (req, res) => {
         
-           sequelize.query(`
-            drop table if exists cities;
+        sequelize.query(`
+        drop table if exists cities;
             drop table if exists countries;
 
-            create table countries (
+        create table countries (
                 country_id serial primary key, 
                 name varchar
             );
 
-            CREATE TABLE cities (
+        CREATE TABLE cities (
                city_id SERIAL PRIMARY KEY,
                name VARCHAR(225),
                rating INT,
                country_id INT,
-                    FOREIGN KEY (country_id) REFERENCES countries(country_id)
-            );
+               FOREIGN KEY (country_id) REFERENCES countries(country_id)
+               );
 
-            
-            insert into countries (name)
+                   
+               insert into countries (name)
             values ('Afghanistan'),
             ('Albania'),
             ('Algeria'),
