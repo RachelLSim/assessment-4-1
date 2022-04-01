@@ -10,7 +10,7 @@ def sales_reports(log_file):
         #pulls the value at index of zero and stores it into variable day
         day = line[0:3]
         #if statement saying if that value is equal to Tue
-        if day == "Tue":
+        if day == "Mon":
             #to print out the entire line
             print(line)
 
